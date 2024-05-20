@@ -71,8 +71,8 @@
           showConfirmButton: false,
           timer: 2000,
         });
-      }
+        }
+      },
     },
-  },
-};
-</script>
+  };
+  </script>

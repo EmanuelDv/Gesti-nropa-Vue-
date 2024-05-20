@@ -1,10 +1,10 @@
 <template>
     <div class="container text-start">
-      <h1 class="text-primary fw-bold">Editar Proveedor</h1>
+      <h1 class="text-primary fw-bold">Editar Categoría</h1>
       <div class="card">
-        <div class="card-header fw-bold">Proveedor</div>
+        <div class="card-header fw-bold">Categoría</div>
         <div class="card-body">
-          <form @submit.prevent="updateProveedor">
+          <form @submit.prevent="updateCategoria">
             <div class="row mb-3">
               <label for="id" class="form-label">Código</label>
               <div class="input-group">
@@ -15,9 +15,9 @@
                   type="text"
                   class="form-control"
                   id="id"
-                  placeholder="Código Proveedor"
+                  placeholder="Código Categoría"
                   disabled
-                  v-model="proveedor.id"
+                  v-model="categoria.id"
                 />
               </div>
             </div>
@@ -25,29 +25,29 @@
               <label for="nombre" class="form-label">Nombre</label>
               <div class="input-group">
                 <div class="input-group-text">
-                  <font-awesome-icon icon="user" />
+                  <font-awesome-icon icon="list" />
                 </div>
                 <input
                   type="text"
                   class="form-control"
                   id="nombre"
-                  placeholder="Nombre del Proveedor"
-                  v-model="proveedor.nombre"
+                  placeholder="Nombre de la Categoría"
+                  v-model="categoria.nombre"
                 />
               </div>
             </div>
             <div class="row mb-3">
-              <label for="contacto" class="form-label">Contacto</label>
+              <label for="descripcion" class="form-label">Descripción</label>
               <div class="input-group">
                 <div class="input-group-text">
-                  <font-awesome-icon icon="phone" />
+                  <font-awesome-icon icon="align-left" />
                 </div>
                 <input
                   type="text"
                   class="form-control"
-                  id="contacto"
-                  placeholder="Contacto del Proveedor"
-                  v-model="proveedor.contacto"
+                  id="descripcion"
+                  placeholder="Descripción de la Categoría"
+                  v-model="categoria.descripcion"
                 />
               </div>
             </div>
@@ -66,51 +66,51 @@
   import Swal from "sweetalert2";
   
   export default {
-    name: "EditarProveedor",
+    name: "EditarCategoria",
     data() {
       return {
-        proveedor: {
+        categoria: {
           id: 0,
           nombre: "",
-          contacto: ""
+          descripcion: ""
         }
       };
     },
     methods: {
       cancelar() {
-        this.$router.push({ name: "Proveedores" });
+        this.$router.push({ name: "Categorias" });
       },
-      async updateProveedor() {
+      async updateCategoria() {
         try {
           const res = await axios.put(
-            `http://127.0.0.1:8000/api/proveedores/${this.proveedor.id}`,
-            this.proveedor
+            `http://127.0.0.1:8000/api/categorias/${this.categoria.id}`,
+            this.categoria
           );
           if (res.status === 200) {
             Swal.fire({
               position: "top-end",
               icon: "success",
-              title: "Proveedor actualizado con éxito",
+              title: "Categoría actualizada con éxito",
               showConfirmButton: false,
               timer: 2000
             });
-            this.$router.push({ name: "Proveedores" });
+            this.$router.push({ name: "Categorias" });
           }
         } catch (error) {
-          Swal.fire("¡Error!", "Hubo un error al actualizar el proveedor.", "error");
+          Swal.fire("¡Error!", "Hubo un error al actualizar la categoría.", "error");
         }
       },
-      async fetchProveedor() {
+      async fetchCategoria() {
         try {
-          const response = await axios.get(`http://127.0.0.1:8000/api/proveedores/${this.$route.params.id}`);
-          this.proveedor = response.data.proveedor;
+          const response = await axios.get(`http://127.0.0.1:8000/api/categorias/${this.$route.params.id}`);
+          this.categoria = response.data.categoria;
         } catch (error) {
-          Swal.fire("¡Error!", "Hubo un error al obtener el proveedor.", "error");
+          Swal.fire("¡Error!", "Hubo un error al obtener la categoría.", "error");
         }
       }
     },
     mounted() {
-      this.fetchProveedor();
+      this.fetchCategoria();
     }
   };
   </script>

@@ -11,6 +11,13 @@ import Proveedores from "../views/Proveedores.vue";
 import NewProveedor from "@/components/Proveedores/NewProveedor.vue";
 import EditarProveedor from "@/components/Proveedores/EditarProveedor.vue";
 
+import Categorias from "../views/Categorias.vue";
+import NewCategoria from "@/components/Categorias/NewCategoria.vue";
+import EditarCategoria from "@/components/Categorias/EditarCategoria.vue";
+
+
+
+
 
 const routes = [
   {
@@ -76,6 +83,23 @@ const routes = [
     component: EditarProveedor,
   },
 
+
+  
+{
+  path: "/categorias",
+  name: "Categorias",
+  component: Categorias,
+},
+{
+  path: "/add-categoria/",
+  name: "NewCategoria",
+  component: NewCategoria,
+},
+{
+  path: "/editar-categoria/:id",
+  name: "EditarCategoria",
+  component: EditarCategoria,
+},
 
 ];
 
