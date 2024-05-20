@@ -7,6 +7,10 @@ import Ventas from "../views/Ventas.vue";
 import NewVenta from "@/components/Ventas/NewVenta.vue";
 import EditarVenta from "@/components/Ventas/EditarVenta.vue";
 
+import Proveedores from "../views/Proveedores.vue";
+import NewProveedor from "@/components/Proveedores/NewProveedor.vue";
+import EditarProveedor from "@/components/Proveedores/EditarProveedor.vue";
+
 
 const routes = [
   {
@@ -53,6 +57,26 @@ const routes = [
     name: 'EditarVenta',
     component: EditarVenta,
   },
+
+
+
+{
+    path: "/proveedores",
+    name: "Proveedores",
+    component: Proveedores,
+  },
+  {
+    path: "/add-proveedor/",
+    name: "NewProveedor",
+    component: NewProveedor,
+  },
+  {
+    path: "/editar-proveedor/:id",
+    name: "EditarProveedor",
+    component: EditarProveedor,
+  },
+
+
 ];
 
 const router = createRouter({
