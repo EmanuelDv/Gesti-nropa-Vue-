@@ -2,7 +2,7 @@
     <div class="container">
       <h1>
         Listado de Clientes
-        <button @click="newProveedor" class="btn btn-success mx-2">
+        <button @click="newCliente" class="btn btn-success mx-2">
           <font-awesome-icon icon="plus" />
         </button>
       </h1>
@@ -11,24 +11,29 @@
           <tr>
             <th scope="col">Id</th>
             <th scope="col">Nombre</th>
-            <th scope="col">Contacto</th>
+            <th scope="col">Apellido</th>
+            <th scope="col">Email</th>
+            <th scope="col">Telefono</th>
             <th scope="col">Acciones</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(proveedor, index) in proveedores" :key="proveedor.id">
-            <th scope="row">{{ proveedor.id }}</th>
-            <td>{{ proveedor.nombre }}</td>
-            <td>{{ proveedor.contacto }}</td>
+          <tr v-for="(cliente, index) in clientes" :key="cliente.id">
+            <th scope="row">{{ cliente.id }}</th>
+            <td>{{ cliente.nombre }}</td>
+            <td>{{ cliente.apellido }}</td>
+            <td>{{ cliente.email }}</td>
+            <td>{{ cliente.telefono }}</td>
+
             <td>
               <button
-                @click="deleteProveedor(proveedor.id)"
+                @click="deleteCliente(cliente.id)"
                 class="btn btn-danger mx-2"
               >
                 <font-awesome-icon icon="trash" />
               </button>
               <button
-                @click="editProveedor(proveedor.id)"
+                @click="editCliente(cliente.id)"
                 class="btn btn-warning mx-2"
               >
                 <font-awesome-icon icon="pencil" />
@@ -46,48 +51,48 @@
   import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
   
   export default {
-    name: "Proveedores",
+    name: "Clientes",
     components: {
       FontAwesomeIcon,
     },
     data() {
       return {
-        proveedores: [],
+        clientes: [],
       };
     },
     methods: {
-      async deleteProveedor(id) {
+      async deleteCliente(id) {
         const result = await Swal.fire({
-          title: `¿Estás seguro de eliminar el proveedor con id ${id}?`,
+          title: `¿Estás seguro de eliminar el cliente con id ${id}?`,
           showCancelButton: true,
           confirmButtonText: "Eliminar",
         });
   
         if (result.isConfirmed) {
           try {
-            const response = await axios.delete(`http://127.0.0.1:8000/api/proveedores/${id}`);
+            const response = await axios.delete(`http://127.0.0.1:8000/api/clientes/${id}`);
             if (response.data.success) {
               Swal.fire("¡Eliminado!", "", "success");
-              this.proveedores = this.proveedores.filter(proveedor => proveedor.id !== id);
+              this.clientes = this.clientes.filter(cliente => cliente.id !== id);
             }
           } catch (error) {
-            Swal.fire("¡Error!", "Hubo un error al eliminar el proveedor.", "error");
+            Swal.fire("¡Error!", "Hubo un error al eliminar el cliente.", "error");
           }
         }
       },
-      editProveedor(id) {
-        this.$router.push({ name: 'EditarProveedor', params: { id } });
+      editCliente(id) {
+        this.$router.push({ name: 'EditarCliente', params: { id } });
       },
-      newProveedor() {
-        this.$router.push({ name: 'NewProveedor' });
+      newCliente() {
+        this.$router.push({ name: 'NewCliente' });
       }
     },
     async mounted() {
       try {
-        const response = await axios.get(`http://127.0.0.1:8000/api/proveedores`);
-        this.proveedores = response.data.proveedores;
+        const response = await axios.get(`http://127.0.0.1:8000/api/clientes`);
+        this.clientes = response.data.clientes;
       } catch (error) {
-        Swal.fire("¡Error!", "Hubo un error al obtener los proveedores.", "error");
+        Swal.fire("¡Error!", "Hubo un error al obtener los clientes.", "error");
       }
     }
   };

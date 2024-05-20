@@ -15,6 +15,9 @@ import Categorias from "../views/Categorias.vue";
 import NewCategoria from "@/components/Categorias/NewCategoria.vue";
 import EditarCategoria from "@/components/Categorias/EditarCategoria.vue";
 
+import Clientes from "../views/Clientes.vue";
+import NewCliente from "@/components/Clientes/NewCliente.vue";
+import EditarCliente from "@/components/Clientes/EditarCliente.vue";
 
 
 
@@ -99,6 +102,23 @@ const routes = [
   path: "/editar-categoria/:id",
   name: "EditarCategoria",
   component: EditarCategoria,
+},
+
+ 
+{
+  path: "/clientes",
+  name: "Clientes",
+  component: Clientes,
+},
+{
+  path: "/add-cliente/",
+  name: "NewCliente",
+  component: NewCliente,
+},
+{
+  path: "/editar-cliente/:id",
+  name: "EditarCliente",
+  component: EditarCliente,
 },
 
 ];
